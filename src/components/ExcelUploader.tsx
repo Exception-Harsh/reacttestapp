@@ -213,7 +213,7 @@ const ExcelUploader: React.FC = () => {
   const [rows, setRows] = useState<GridData[]>([]);
 
   // Define headers that are known to be dates
-  const dateColumns = ['Date', 'DOB', 'JoinDate'];
+  const dateColumns = ['Date', 'DOB', 'JoinDate', 'Doc Date'];
 
   const isExcelDate = (value: number): boolean => {
     // Assuming Excel date serial numbers start from 1 to 2958465 (01-01-1900 to 31-12-9999)
@@ -248,7 +248,7 @@ const ExcelUploader: React.FC = () => {
             if (typeof cellValue === 'number' && dateColumns.includes(header) && isExcelDate(cellValue)) {
               rowData[header || `column_${i}`] = XLSX.SSF.format('dd-mm-yyyy', cellValue);
             } else {
-              rowData[header || `column_${i}`] = cellValue || '';
+              rowData[header || `column_${i}`] = cellValue === '-' || cellValue === undefined || cellValue === '' ? 'N/A' : cellValue;
             }
           });
           return rowData;
@@ -299,4 +299,3 @@ const ExcelUploader: React.FC = () => {
 };
 
 export default ExcelUploader;
-
