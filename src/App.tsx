@@ -1,8 +1,8 @@
-import React from 'react';
 import ExcelUploader from './components/ExcelUploader';
+import DBConnection from "./components/DBConnection";
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -10,6 +10,9 @@ const App: React.FC = () => {
       </header>
       <main>
         <ExcelUploader />
+      </main>
+      <main>
+        <DBConnection />
       </main>
     </div>
   );

@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDropzone, Accept } from 'react-dropzone';
 import * as XLSX from 'xlsx';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { GridData } from '../types/alltypes';
 
-interface GridData {
-  id: number;
-  [key: string]: any;
-}
-
-const ExcelUploader: React.FC = () => {
+// try to write this without state
+const ExcelUploader = () => {
   const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useState<GridData[]>([]);
 
   // Define headers that are known to be dates
-  const dateColumns = ['Date', 'DOB', 'JoinDate', 'Doc Date'];
+  const dateColumns = ['Date', 'Doc Date'];
 
   const isExcelDate = (value: number): boolean => {
     // Assuming Excel date serial numbers start from 1 to 2958465 (01-01-1900 to 31-12-9999)
@@ -67,7 +64,7 @@ const ExcelUploader: React.FC = () => {
     accept: { 'application/vnd.ms-excel': ['.xls'], 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'] } as Accept,
     multiple: false,
   });
-
+ // no inline style use classes as much as possible
   return (
     <div style={{ padding: '20px' }}>
       <div
@@ -99,3 +96,4 @@ const ExcelUploader: React.FC = () => {
 };
 
 export default ExcelUploader;
+// npm run preview 
